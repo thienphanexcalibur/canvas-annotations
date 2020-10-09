@@ -10,6 +10,10 @@
   "dependencies": {
     "fabric": "4.1.0"
   },
+  "alias": {
+    "constants": "./src/constants.js",
+    "drawing": "./src/drawing"
+  },
   "devDependencies": {
     "@babel/core": "7.2.0",
     "@types/fabric": "1.5.52",
