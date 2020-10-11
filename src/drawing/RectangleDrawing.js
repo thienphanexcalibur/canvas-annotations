@@ -1,4 +1,4 @@
-import { default as BaseDrawing } from "./BaseDrawing";
+import BaseDrawing from "./BaseDrawing";
 import { defaultRectOptions } from "../constants";
 
 export default class RectangleDrawing extends BaseDrawing {
