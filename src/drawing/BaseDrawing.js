@@ -85,6 +85,9 @@ export default class BaseDrawing {
     this.__removeEvents();
     this.__setDrawing(false);
     this.__lockObjects(this.objects, false);
+
+    // Prints out all the objects after finish drawing
+    console.log(this.canvas.getObjects());
   }
 
   /**
@@ -103,7 +106,6 @@ export default class BaseDrawing {
    */
   __lockObjects(object, value) {
     if (Array.isArray(object)) {
-      console.log(object);
       object.forEach((fabricObject) => {
         fabricObject.set("lockMovementX", value);
         fabricObject.set("lockMovementY", value);
