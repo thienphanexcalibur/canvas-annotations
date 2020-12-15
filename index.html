@@ -6,7 +6,12 @@
   </head>
 
   <body>
-    <div id="app"><canvas id="c" width="400" height="400"></canvas></div>
+    <div id="app">
+      <div class="canvas_wrapper">
+        <img id="static_image" />
+        <canvas id="c" width="400" height="400"></canvas>
+      </div>
+    </div>
     <div class="status is-drawing"></div>
     <div class="draw-control">
       <button class="draw-rectangle">Rectangle</button>

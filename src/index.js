@@ -1,14 +1,12 @@
-import 'regenerator-runtime/runtime';
+import "regenerator-runtime/runtime";
 import "./styles.css";
 import { fabric } from "fabric";
 import testImg from "../testocr.png";
 import { RectangleDrawing, PolygonDrawing } from "./drawing";
-import { waitImageLoad } from './utils';
-
+import { waitImageLoad } from "./utils";
 
 (async function init() {
-
-  let type = 'rect';
+  let type = "rect";
 
   let drawInstance = null;
   // Control Button
@@ -26,9 +24,8 @@ import { waitImageLoad } from './utils';
   }
 
   // Image tag
-  const imageNode = document.createElement("img");
+  const imageNode = document.querySelector("#static_image");
   imageNode.src = testImg;
-
 
   // Wait for image to load
   await waitImageLoad(imageNode);
@@ -39,11 +36,8 @@ import { waitImageLoad } from './utils';
     height: imageNode.narualHeight,
     selectable: true
   });
-  const imgInstance = new fabric.Image(imageNode, {
-    selectable: false
-  });
-  canvas.add(imgInstance);
 
+  // canvas.add(imgInstance);
 
   // Init Instance
   const drawRectangle = new RectangleDrawing(canvas, fabric);
@@ -52,22 +46,19 @@ import { waitImageLoad } from './utils';
   // Default to draw rectangle
   drawInstance = drawRectangle;
 
-  const drawRectangleBtn = document.querySelector('.draw-rectangle');
-  const drawPolygonBtn = document.querySelector('.draw-polygon');
-
+  const drawRectangleBtn = document.querySelector(".draw-rectangle");
+  const drawPolygonBtn = document.querySelector(".draw-polygon");
 
   // Events
-  drawRectangleBtn.addEventListener('click', (e) => {
+  drawRectangleBtn.addEventListener("click", (e) => {
     drawInstance.unsubscribe();
     drawInstance = drawRectangle;
   });
 
-
-  drawPolygonBtn.addEventListener('click', (e) => {
+  drawPolygonBtn.addEventListener("click", (e) => {
     drawInstance.unsubscribe();
     drawInstance = drawPolygon;
   });
-
 
   buttonControl.addEventListener("click", () => {
     // Drawing on

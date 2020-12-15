@@ -2,6 +2,14 @@ body {
   font-family: sans-serif;
 }
 
-canvas {
+.canvas_wrapper {
+  position: relative;
+}
+
+.canvas-container {
   border: 1px solid #999;
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  z-index: 999;
 }

@@ -78,11 +78,13 @@ export default class PolygonDrawing extends BaseDrawing {
     this.canvas.add(polyline);
     polyline.setCoords();
     this.canvas.setActiveObject(polyline);
-    // this.showControlPoints();
-    polyline.on("selected", () => this.showControlPoints());
-    polyline.on("deselected", (e) => {
-      polyline.edit = false;
-    });
+    // polyline.on("selected", () => {
+    //   this.showControlPoints();
+    //   polyline.edit = true;
+    // });
+    // polyline.on("deselected", (e) => {
+    //   polyline.edit = false;
+    // });
     this.unsubscribe();
     this.subscribe();
   }
@@ -107,7 +109,7 @@ export default class PolygonDrawing extends BaseDrawing {
   // and the current position in canvas coordinate
   // transform.target is a reference to the current object being transformed,
   static actionHandler(eventData, transform, x, y) {
-    var polygon = transform.target,
+    const polygon = transform.target,
       currentControl = polygon.controls[polygon.__corner],
       mouseLocalPosition = polygon.toLocalPoint(
         new fabric.Point(x, y),
@@ -132,7 +134,7 @@ export default class PolygonDrawing extends BaseDrawing {
   // width/height/top/left.
   static anchorWrapper(anchorIndex, fn) {
     return function (eventData, transform, x, y) {
-      var fabricObject = transform.target,
+      const fabricObject = transform.target,
         absolutePoint = fabric.util.transformPoint(
           {
             x: fabricObject.points[anchorIndex].x - fabricObject.pathOffset.x,
@@ -160,9 +162,9 @@ export default class PolygonDrawing extends BaseDrawing {
     // and you do not want the changes happened
     // later to reflect on the copy.
     let poly = this.activeObject;
-    poly.edit = !poly.edit;
-    if (poly.edit) {
-      var lastControl = poly.points.length - 1;
+    poly.hasControls = true;
+    if (!poly.edit) {
+      const lastControl = poly.points.length - 1;
       poly.cornerStyle = "circle";
       poly.cornerColor = "rgba(0,0,255,0.5)";
       poly.controls = poly.points.reduce(function (acc, point, index) {
@@ -183,6 +185,7 @@ export default class PolygonDrawing extends BaseDrawing {
       poly.controls = fabric.Object.prototype.controls;
     }
     poly.hasBorders = !poly.edit;
+    poly.edit = !poly.edit;
     this.canvas.requestRenderAll();
   }
 }

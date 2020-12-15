@@ -34,6 +34,7 @@ export default class BaseDrawing {
    * Returns current canvas objects
    * @param {void}
    * @returns {Array<fabric.Object>}
+   * TODO: get object base on current drawing type
    */
   get objects() {
     return this.canvas.getObjects(this.type);
@@ -88,6 +89,7 @@ export default class BaseDrawing {
 
     // Prints out all the objects after finish drawing
     console.log(this.canvas.getObjects());
+    // console.log(this.objects);
   }
 
   /**

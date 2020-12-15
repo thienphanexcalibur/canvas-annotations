@@ -22,26 +22,26 @@ export default class RectangleDrawing extends BaseDrawing {
       height: Math.abs(pointer.y - this.origY)
     });
     this.activeObject.setCoords();
-    this.canvas.renderAll();
+    this.canvas.requestRenderAll();
   }
 
   // mouse down cb
   _onMouseDownCallback(e) {
-      const pointer = this.canvas.getPointer(e);
-      this.origX = pointer.x;
-      this.origY = pointer.y;
-      const rect = new this.fabric.Rect({
-        ...defaultRectOptions,
-        left: this.origX,
-        top: this.origY,
-        width: 0,
-        height: 0,
-        selectionBackgroundColor: "rgba(245, 245, 220, 0.5)"
-      });
+    const pointer = this.canvas.getPointer(e);
+    this.origX = pointer.x;
+    this.origY = pointer.y;
+    const rect = new this.fabric.Rect({
+      ...defaultRectOptions,
+      left: this.origX,
+      top: this.origY,
+      width: 0,
+      height: 0,
+      selectionBackgroundColor: "rgba(245, 245, 220, 0.5)"
+    });
 
-      this.canvas.add(rect);
-      this.canvas.setActiveObject(rect);
-      return;
+    this.canvas.add(rect);
+    this.canvas.setActiveObject(rect);
+    return;
   }
 
   // mouse up cb
