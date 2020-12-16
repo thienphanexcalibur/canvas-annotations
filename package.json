@@ -8,7 +8,7 @@
     "build": "parcel build index.html"
   },
   "dependencies": {
-    "fabric": "4.1.0"
+    "fabric": "4.2.0"
   },
   "alias": {
     "constants": "./src/constants.js",

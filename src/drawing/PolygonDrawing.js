@@ -1,6 +1,7 @@
 import BaseDrawing from "./BaseDrawing";
 import { fabric } from "fabric";
 import { defaultLineOptions } from "../constants";
+import { Polygon } from "../override";
 
 export default class PolygonDrawing extends BaseDrawing {
   constructor(canvas, fabric, type) {
@@ -11,7 +12,6 @@ export default class PolygonDrawing extends BaseDrawing {
     this.lines = [];
     this._onMouseDblClickCallback = this._onMouseDblClickCallback.bind(this);
     this.__removeAllLinesAndPoints = this.__removeAllLinesAndPoints.bind(this);
-    this.showControlPoints = this.showControlPoints.bind(this);
   }
 
   __registerEvents() {
@@ -154,38 +154,5 @@ export default class PolygonDrawing extends BaseDrawing {
       fabricObject.setPositionByOrigin(absolutePoint, newX + 0.5, newY + 0.5);
       return actionPerformed;
     };
-  }
-
-  showControlPoints() {
-    // clone what are you copying since you
-    // may want copy and paste on different moment.
-    // and you do not want the changes happened
-    // later to reflect on the copy.
-    let poly = this.activeObject;
-    poly.hasControls = true;
-    if (!poly.edit) {
-      const lastControl = poly.points.length - 1;
-      poly.cornerStyle = "circle";
-      poly.cornerColor = "rgba(0,0,255,0.5)";
-      poly.controls = poly.points.reduce(function (acc, point, index) {
-        acc["p" + index] = new fabric.Control({
-          positionHandler: PolygonDrawing.polygonPositionHandler,
-          actionHandler: PolygonDrawing.anchorWrapper(
-            index > 0 ? index - 1 : lastControl,
-            PolygonDrawing.actionHandler
-          ),
-          actionName: "modifyPolygon",
-          pointIndex: index
-        });
-        return acc;
-      }, {});
-    } else {
-      poly.cornerColor = "blue";
-      poly.cornerStyle = "rect";
-      poly.controls = fabric.Object.prototype.controls;
-    }
-    poly.hasBorders = !poly.edit;
-    poly.edit = !poly.edit;
-    this.canvas.requestRenderAll();
   }
 }

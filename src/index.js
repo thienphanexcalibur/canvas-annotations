@@ -4,6 +4,40 @@ import { fabric } from "fabric";
 import testImg from "../testocr.png";
 import { RectangleDrawing, PolygonDrawing } from "./drawing";
 import { waitImageLoad } from "./utils";
+import mockJSON from "./mock.json";
+
+const mock = false;
+
+// This one gives me a fucking hardship fuckkkkkk
+// Override behaviour of Polygon prototype
+fabric.util.object.extend(fabric.Polygon.prototype, {
+  initialize(points, options) {
+    this.callSuper("initialize", points, options);
+
+    this.on("selected", () => {
+      const lastControl = points.length - 1;
+      this.cornerStyle = "circle";
+      this.cornerColor = "rgba(0,0,255,0.5)";
+      this.controls = points.reduce(function (acc, point, index) {
+        acc["p" + index] = new fabric.Control({
+          positionHandler: PolygonDrawing.polygonPositionHandler,
+          actionHandler: PolygonDrawing.anchorWrapper(
+            index > 0 ? index - 1 : lastControl,
+            PolygonDrawing.actionHandler
+          ),
+          actionName: "modifyPolygon",
+          pointIndex: index
+        });
+        return acc;
+      }, {});
+    });
+    this.on("deselected", () => {
+      this.cornerColor = "blue";
+      this.cornerStyle = "rect";
+      this.controls = fabric.Object.prototype.controls;
+    });
+  }
+});
 
 (async function init() {
   let type = "rect";
@@ -37,7 +71,9 @@ import { waitImageLoad } from "./utils";
     selectable: true
   });
 
-  // canvas.add(imgInstance);
+  if (mock) {
+    canvas.loadFromJSON(mockJSON, canvas.requestRenderAll.bind(canvas));
+  }
 
   // Init Instance
   const drawRectangle = new RectangleDrawing(canvas, fabric);
@@ -46,8 +82,10 @@ import { waitImageLoad } from "./utils";
   // Default to draw rectangle
   drawInstance = drawRectangle;
 
+  // Button selectors
   const drawRectangleBtn = document.querySelector(".draw-rectangle");
   const drawPolygonBtn = document.querySelector(".draw-polygon");
+  const serializeBtn = document.querySelector(".serialize");
 
   // Events
   drawRectangleBtn.addEventListener("click", (e) => {
@@ -64,6 +102,10 @@ import { waitImageLoad } from "./utils";
     // Drawing on
     toggleIsDrawing(true);
     drawInstance.subscribe();
+  });
+
+  serializeBtn.addEventListener("click", () => {
+    console.log(canvas.toObject());
   });
 
   toggleIsDrawing(false);

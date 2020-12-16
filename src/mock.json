@@ -1,0 +1,181 @@
+{
+  "version": "4.2.0",
+  "objects": [
+    {
+      "type": "polygon",
+      "version": "4.2.0",
+      "originX": "left",
+      "originY": "top",
+      "left": 104,
+      "top": 24,
+      "width": 290,
+      "height": 162,
+      "fill": "transparent",
+      "stroke": "red",
+      "strokeWidth": 2,
+      "strokeDashArray": null,
+      "strokeLineCap": "butt",
+      "strokeDashOffset": 0,
+      "strokeLineJoin": "miter",
+      "strokeMiterLimit": 4,
+      "scaleX": 1,
+      "scaleY": 1,
+      "angle": 0,
+      "flipX": false,
+      "flipY": false,
+      "opacity": 1,
+      "shadow": null,
+      "visible": true,
+      "backgroundColor": "",
+      "fillRule": "nonzero",
+      "paintFirst": "fill",
+      "globalCompositeOperation": "source-over",
+      "skewX": 0,
+      "skewY": 0,
+      "points": [
+        {
+          "x": 68,
+          "y": 128
+        },
+        {
+          "x": 358,
+          "y": 67
+        },
+        {
+          "x": 356,
+          "y": 197
+        },
+        {
+          "x": 182,
+          "y": 229
+        },
+        {
+          "x": 182,
+          "y": 229
+        }
+      ]
+    },
+    {
+      "type": "polygon",
+      "version": "4.2.0",
+      "originX": "left",
+      "originY": "top",
+      "left": 363,
+      "top": 82,
+      "width": 243,
+      "height": 243,
+      "fill": "transparent",
+      "stroke": "red",
+      "strokeWidth": 2,
+      "strokeDashArray": null,
+      "strokeLineCap": "butt",
+      "strokeDashOffset": 0,
+      "strokeLineJoin": "miter",
+      "strokeMiterLimit": 4,
+      "scaleX": 1,
+      "scaleY": 1,
+      "angle": 0,
+      "flipX": false,
+      "flipY": false,
+      "opacity": 1,
+      "shadow": null,
+      "visible": true,
+      "backgroundColor": "",
+      "fillRule": "nonzero",
+      "paintFirst": "fill",
+      "globalCompositeOperation": "source-over",
+      "skewX": 0,
+      "skewY": 0,
+      "points": [
+        {
+          "x": 326,
+          "y": 264
+        },
+        {
+          "x": 530,
+          "y": 97
+        },
+        {
+          "x": 569,
+          "y": 259
+        },
+        {
+          "x": 432,
+          "y": 340
+        },
+        {
+          "x": 432,
+          "y": 340
+        }
+      ]
+    },
+    {
+      "type": "rect",
+      "version": "4.2.0",
+      "originX": "left",
+      "originY": "top",
+      "left": 72,
+      "top": 203,
+      "width": 196,
+      "height": 91,
+      "fill": "transparent",
+      "stroke": "red",
+      "strokeWidth": 2,
+      "strokeDashArray": null,
+      "strokeLineCap": "butt",
+      "strokeDashOffset": 0,
+      "strokeLineJoin": "miter",
+      "strokeMiterLimit": 4,
+      "scaleX": 1,
+      "scaleY": 1,
+      "angle": 0,
+      "flipX": false,
+      "flipY": false,
+      "opacity": 1,
+      "shadow": null,
+      "visible": true,
+      "backgroundColor": "",
+      "fillRule": "nonzero",
+      "paintFirst": "fill",
+      "globalCompositeOperation": "source-over",
+      "skewX": 0,
+      "skewY": 0,
+      "rx": 0,
+      "ry": 0
+    },
+    {
+      "type": "rect",
+      "version": "4.2.0",
+      "originX": "left",
+      "originY": "top",
+      "left": 447,
+      "top": 23,
+      "width": 134,
+      "height": 48,
+      "fill": "transparent",
+      "stroke": "red",
+      "strokeWidth": 2,
+      "strokeDashArray": null,
+      "strokeLineCap": "butt",
+      "strokeDashOffset": 0,
+      "strokeLineJoin": "miter",
+      "strokeMiterLimit": 4,
+      "scaleX": 1,
+      "scaleY": 1,
+      "angle": 0,
+      "flipX": false,
+      "flipY": false,
+      "opacity": 1,
+      "shadow": null,
+      "visible": true,
+      "backgroundColor": "",
+      "fillRule": "nonzero",
+      "paintFirst": "fill",
+      "globalCompositeOperation": "source-over",
+      "skewX": 0,
+      "skewY": 0,
+      "rx": 0,
+      "ry": 0
+    }
+  ]
+}
