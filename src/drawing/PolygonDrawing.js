@@ -78,13 +78,6 @@ export default class PolygonDrawing extends BaseDrawing {
     this.canvas.add(polyline);
     polyline.setCoords();
     this.canvas.setActiveObject(polyline);
-    // polyline.on("selected", () => {
-    //   this.showControlPoints();
-    //   polyline.edit = true;
-    // });
-    // polyline.on("deselected", (e) => {
-    //   polyline.edit = false;
-    // });
     this.unsubscribe();
     this.subscribe();
   }

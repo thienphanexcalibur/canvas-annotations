@@ -1,14 +1,11 @@
 {
   "name": "canvas-annotations",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
-  "main": "index.html",
+  "main": "src/drawing/index.js",
   "scripts": {
     "start": "parcel index.html --open",
     "build": "parcel build index.html"
-  },
-  "dependencies": {
-    "fabric": "4.2.0"
   },
   "alias": {
     "constants": "./src/constants.js",
@@ -19,5 +16,8 @@
     "@types/fabric": "1.5.52",
     "parcel-bundler": "^1.6.1"
   },
-  "keywords": []
+  "keywords": [],
+  "dependencies": {
+    "fabric": "4.2.0"
+  }
 }
