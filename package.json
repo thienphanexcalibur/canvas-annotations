@@ -14,10 +14,8 @@
   "devDependencies": {
     "@babel/core": "7.2.0",
     "@types/fabric": "1.5.52",
-    "parcel-bundler": "^1.6.1"
+    "parcel-bundler": "^1.6.1",
+    "fabric": "4.3.0"
   },
-  "keywords": [],
-  "dependencies": {
-    "fabric": "4.2.0"
-  }
+  "keywords": []
 }
