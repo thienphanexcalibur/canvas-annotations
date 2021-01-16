@@ -56,13 +56,12 @@ export default class RectangleDrawing extends BaseDrawing {
   // mouse up cb
   _onMouseUpCallback(e) {
     this.__lockObjects(this.objects, true);
+    this.canvas.discardActiveObject(this.activeObject).renderAll();
     setTimeout(() => {
       if (this.activeObject && this.activeObject.get("width") === 0) {
         this.canvas.remove(this.activeObject);
       }
     }, 100);
     this.onCreatedCb(this.rect);
-    this.unsubscribe();
-    this.subscribe();
   }
 }
