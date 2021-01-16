@@ -55,7 +55,7 @@ export default class RectangleDrawing extends BaseDrawing {
 
   // mouse up cb
   _onMouseUpCallback(e) {
-    //this.__lockObjects(this.objects, true);
+    this.__lockObjects(this.objects, true);
     setTimeout(() => {
       if (this.activeObject && this.activeObject.get("width") === 0) {
         this.canvas.remove(this.activeObject);

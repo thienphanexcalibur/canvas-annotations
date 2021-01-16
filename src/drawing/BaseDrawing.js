@@ -85,10 +85,6 @@ export default class BaseDrawing {
     this.__removeEvents();
     this.__setDrawing(false);
     this.__lockObjects(this.objects, false);
-
-    // Prints out all the objects after finish drawing
-    console.log(this.canvas.getObjects());
-    // console.log(this.objects);
   }
 
   /**
