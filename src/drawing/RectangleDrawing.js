@@ -63,5 +63,7 @@ export default class RectangleDrawing extends BaseDrawing {
       }
     }, 100);
     this.onCreatedCb(this.rect);
+    this.unsubscribe();
+    this.subscribe();
   }
 }
