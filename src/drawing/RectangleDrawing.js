@@ -2,8 +2,14 @@ import BaseDrawing from "./BaseDrawing";
 import { defaultRectOptions } from "../constants";
 
 export default class RectangleDrawing extends BaseDrawing {
-  constructor(canvas, fabric, type) {
+  constructor(canvas, fabric, type, onCreatedCb) {
     super(canvas, fabric, type);
+
+    // Initial Rect
+    this.rect = null;
+
+    // Callback on created
+    this.onCreatedCb = onCreatedCb;
   }
   // MOuse move cb
   _onMouseMoveCallback(e) {
@@ -39,6 +45,9 @@ export default class RectangleDrawing extends BaseDrawing {
       selectionBackgroundColor: "rgba(245, 245, 220, 0.5)"
     });
 
+    // Set current rect
+    this.rect = rect;
+
     this.canvas.add(rect);
     this.canvas.setActiveObject(rect);
     return;
@@ -46,13 +55,14 @@ export default class RectangleDrawing extends BaseDrawing {
 
   // mouse up cb
   _onMouseUpCallback(e) {
-    this.__lockObjects(this.objects, true);
-    this.activeObject.set("thien", "deptrai");
-    this.canvas.discardActiveObject(this.activeObject).renderAll();
+    //this.__lockObjects(this.objects, true);
     setTimeout(() => {
       if (this.activeObject && this.activeObject.get("width") === 0) {
         this.canvas.remove(this.activeObject);
       }
     }, 100);
+    this.onCreatedCb(this.rect);
+    this.unsubscribe();
+    this.subscribe();
   }
 }

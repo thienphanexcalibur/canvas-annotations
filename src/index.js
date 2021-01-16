@@ -76,8 +76,8 @@ fabric.util.object.extend(fabric.Polygon.prototype, {
   }
 
   // Init Instance
-  const drawRectangle = new RectangleDrawing(canvas, fabric);
-  const drawPolygon = new PolygonDrawing(canvas, fabric);
+  const drawRectangle = new RectangleDrawing(canvas, fabric, 'rect', (object) => console.log(object));
+  const drawPolygon = new PolygonDrawing(canvas, fabric, 'polygon', (object) => console.log(object));
 
   // Default to draw rectangle
   drawInstance = drawRectangle;

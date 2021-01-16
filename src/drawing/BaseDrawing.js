@@ -5,7 +5,7 @@ export default class BaseDrawing {
    *
    * @param {fabric.Canvas} canvas
    * @param {fabric} fabric
-   * @param {*} type
+   * @param {string} type
    * @returns {void}
    * @constructor
    */
@@ -23,7 +23,6 @@ export default class BaseDrawing {
     this._onMouseUpCallback = this._onMouseUpCallback.bind(this);
     this.__setDrawing = this.__setDrawing.bind(this);
     this.__lockObjects = this.__lockObjects.bind(this);
-    this._onMouseUpCallback = this._onMouseUpCallback.bind(this);
     this.__registerEvents = this.__registerEvents.bind(this);
     this.subscribe = this.subscribe.bind(this);
     this.unsubscribe = this.unsubscribe.bind(this);

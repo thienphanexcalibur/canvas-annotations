@@ -1,10 +1,9 @@
 import BaseDrawing from "./BaseDrawing";
 import { fabric } from "fabric";
 import { defaultLineOptions } from "../constants";
-import { Polygon } from "../override";
 
 export default class PolygonDrawing extends BaseDrawing {
-  constructor(canvas, fabric, type) {
+  constructor(canvas, fabric, type, onCreatedCb) {
     super(canvas, fabric, type);
     this.points = [];
     this.anchorPoint = null;
@@ -12,6 +11,9 @@ export default class PolygonDrawing extends BaseDrawing {
     this.lines = [];
     this._onMouseDblClickCallback = this._onMouseDblClickCallback.bind(this);
     this.__removeAllLinesAndPoints = this.__removeAllLinesAndPoints.bind(this);
+
+    // Callback on created
+    this.onCreatedCb = onCreatedCb;
   }
 
   __registerEvents() {
@@ -78,6 +80,7 @@ export default class PolygonDrawing extends BaseDrawing {
     this.canvas.add(polyline);
     polyline.setCoords();
     this.canvas.setActiveObject(polyline);
+    this.onCreatedCb(polyline);
     this.unsubscribe();
     this.subscribe();
   }
