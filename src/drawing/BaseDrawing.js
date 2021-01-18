@@ -36,7 +36,7 @@ export default class BaseDrawing {
    * TODO: get object base on current drawing type
    */
   get objects() {
-    return this.canvas.getObjects(this.type);
+    return this.canvas.getObjects();
   }
 
   /**
