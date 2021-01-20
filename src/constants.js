@@ -19,8 +19,16 @@ export const defaultPolygonOptions = {
 
 export const defaultLineOptions = {
   strokeWidth: 2,
-  stroke: "red",
-  fill: "red",
+  fill: 'red',
+  stroke: 'red',
+  class: 'line',
+  originX: 'center',
+  originY: 'center',
+  selectable: false,
+  hasBorders: false,
+  hasControls: false,
+  evented: false,
+  objectCaching:false,
   strokeUniform: true,
   noScaleCache: false
 }
