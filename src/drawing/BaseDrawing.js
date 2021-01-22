@@ -102,17 +102,15 @@ export default class BaseDrawing {
    * @param {Boolean} value
    */
   __lockObjects(object, value) {
-    if (Array.isArray(object)) {
-      object.forEach((fabricObject) => {
-        fabricObject.set("lockMovementX", value);
-        fabricObject.set("lockMovementY", value);
-        fabricObject.evented = !value;
-      });
-      return;
+    if (!Array.isArray(object)) {
+      object = [object];
     }
-    object.set("lockMovementX", value);
-    object.set("lockMovementY", value);
-    object.evented = !value;
+    object.forEach((fabricObject) => {
+      fabricObject.set("lockMovementX", value);
+      fabricObject.set("lockMovementY", value);
+      fabricObject.evented = !value;
+      fabricObject.selectable = !value;
+    });
   }
 
   setDrawingMode(type) {

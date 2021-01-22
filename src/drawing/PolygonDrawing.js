@@ -7,24 +7,27 @@ export default class PolygonDrawing extends BaseDrawing {
     super(canvas, fabric, type);
     this.points = [];
     this.anchorPoint = null;
-    this.points = [];
     this.lines = [];
     this._onMouseDblClickCallback = this._onMouseDblClickCallback.bind(this);
     this.__removeAllLinesAndPoints = this.__removeAllLinesAndPoints.bind(this);
-
+    
     // Callback on created
     this.onCreatedCb = onCreatedCb;
   }
-
+  
   __registerEvents() {
     super.__registerEvents();
     this.canvas.on("mouse:dblclick", this._onMouseDblClickCallback);
+
+    // avoid active line moving to top of canvas stack
+    this.canvas.preserveObjectStacking = true;
   }
 
   __removeEvents() {
     super.__removeEvents();
     this.canvas.off("mouse:dblclick", this._onMouseDblClickCallback);
     this.__removeAllLinesAndPoints();
+    this.canvas.preserveObjectStacking = false;
   }
 
   __removeAllLinesAndPoints() {
@@ -44,32 +47,76 @@ export default class PolygonDrawing extends BaseDrawing {
       return;
     }
     const pointer = this.canvas.getPointer(e);
-
     const { x, y } = pointer;
 
     this.activeObject.set("x2", x);
     this.activeObject.set("y2", y);
-
     this.activeObject.setCoords();
 
     this.canvas.renderAll();
   }
 
   _onMouseDownCallback(e) {
+    // finish drawing if re-clicking starting point
+    if(e.target && e.target.id === this.points[0].id){
+      this._finishDrawingPolygon();
+      return;
+    }
+
+    // lock all objects except polygon vertices
+    this.__lockObjects(this.objects.filter((obj) => obj.type !== 'circle'), true);
+
     const pointer = this.canvas.getPointer(e);
     const { x, y } = pointer;
-    const line = new this.fabric.Line([x, y], defaultLineOptions);
-    this.lines.push(line);
+    
+    // polygon vertex
+    const circle = new this.fabric.Circle({
+      radius: 7,
+      fill: 'blue',
+      stroke: '#333333',
+      strokeWidth: 0.5,
+      left: x,
+      top: y,
+      selectable: false,
+      hasBorders: false,
+      hasControls: false,
+      originX:'center',
+      originY:'center',
+      id: `circle-vertex-${this.points.length}`,
+      objectCaching: false
+    });
+    
+    // the starting point is distinguishable with green color
+    if (this.points.length === 0) {
+      circle.set('fill', 'green');
+    }
+    
+    // this is redundant for now
     if (!this.anchorPoint) {
       this.anchorPoint = { x, y };
     }
-    this.points.push({ x, y });
-    this.canvas.add(line);
+    const line = new this.fabric.Line([x, y], defaultLineOptions);
     this.canvas.setActiveObject(line);
+
+    this.lines.push(line);
+    this.points.push(circle);
+    
+    this.canvas.add(line);
+    this.canvas.add(circle);
   }
 
   _onMouseDblClickCallback(e) {
-    const polyline = new this.fabric.Polygon(this.points, {
+    // remove the redundant point caused by double-click
+    this.canvas.remove(this.points.pop());
+    this._finishDrawingPolygon();
+  }
+
+  _finishDrawingPolygon() {
+    const vertices = this.points.map((p) => ({
+      x: p.left,
+      y: p.top
+    }))
+    const polyline = new this.fabric.Polygon(vertices, {
       originX: "left",
       originY: "top",
       strokeWidth: 2,
@@ -84,6 +131,7 @@ export default class PolygonDrawing extends BaseDrawing {
     this.unsubscribe();
     this.subscribe();
   }
+
   // define a function that can locate the controls.
   // this function will be used both for drawing and for interaction.
   static polygonPositionHandler(dim, finalMatrix, fabricObject) {
