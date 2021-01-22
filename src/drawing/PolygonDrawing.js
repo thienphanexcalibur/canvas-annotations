@@ -10,20 +10,24 @@ export default class PolygonDrawing extends BaseDrawing {
     this.lines = [];
     this._onMouseDblClickCallback = this._onMouseDblClickCallback.bind(this);
     this.__removeAllLinesAndPoints = this.__removeAllLinesAndPoints.bind(this);
-
+    
     // Callback on created
     this.onCreatedCb = onCreatedCb;
   }
-
+  
   __registerEvents() {
     super.__registerEvents();
     this.canvas.on("mouse:dblclick", this._onMouseDblClickCallback);
+
+    // avoid active line moving to top of canvas stack
+    this.canvas.preserveObjectStacking = true;
   }
 
   __removeEvents() {
     super.__removeEvents();
     this.canvas.off("mouse:dblclick", this._onMouseDblClickCallback);
     this.__removeAllLinesAndPoints();
+    this.canvas.preserveObjectStacking = false;
   }
 
   __removeAllLinesAndPoints() {
