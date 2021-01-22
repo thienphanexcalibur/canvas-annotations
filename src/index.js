@@ -17,7 +17,7 @@ fabric.util.object.extend(fabric.Polygon.prototype, {
     this.on("selected", () => {
       const lastControl = points.length - 1;
       this.cornerStyle = "circle";
-      this.cornerColor = "rgba(0,0,255,0.5)";
+      this.cornerColor = "rgb(0,0,255)";
       this.controls = points.reduce(function (acc, point, index) {
         acc["p" + index] = new fabric.Control({
           positionHandler: PolygonDrawing.polygonPositionHandler,
